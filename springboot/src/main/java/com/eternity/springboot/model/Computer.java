@@ -1,4 +1,4 @@
-package com.eternity.springboot;
+package com.eternity.springboot.model;
 
 public interface Computer {
 

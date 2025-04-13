@@ -1,5 +1,7 @@
 package com.eternity.springboot;
 
+import com.eternity.springboot.model.Laptop;
+import com.eternity.springboot.service.LaptopService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,8 +13,11 @@ public class SpringbootApplication {
 
 		ApplicationContext context = SpringApplication.run(SpringbootApplication.class, args);
 
-		Programmer obj = context.getBean(Programmer.class);
-		obj.code();
+		LaptopService service = context.getBean(LaptopService.class);
+
+		Laptop lap = context.getBean(Laptop.class);
+		service.addLaptop(lap);
+
 	}
 
 }

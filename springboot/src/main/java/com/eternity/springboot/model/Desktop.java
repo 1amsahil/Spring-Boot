@@ -1,4 +1,4 @@
-package com.eternity.springboot;
+package com.eternity.springboot.model;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
