@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class SpringDataJpaApplication {
 
@@ -23,17 +25,37 @@ public class SpringDataJpaApplication {
 		s1.setMarks(74);
 
 		s2.setRollNo(162);
-		s2.setName("Sahil1");
-		s2.setMarks(60);
+		s2.setName("Eternity");
+		s2.setMarks(70);
 
 		s3.setRollNo(163);
 		s3.setName("Sahil2");
 		s3.setMarks(80);
 
+//// 	INSERT Query
+//		save()
+//		repo.save(s1);
+//		repo.save(s2);
+//		repo.save(s3);
 
-		repo.save(s1);
-		repo.save(s2);
-		repo.save(s3);
+////	READ Query
+//		findAll()
+//		System.out.println(repo.findAll());
+
+//		findById
+//		Optional<Student> s = repo.findById(161);
+//		System.out.println(s.orElse( new Student() ));
+
+//		findByName (Self-Created)
+//		System.out.println(repo.findByName("Sahil"));
+//		System.out.println(repo.findByMarksGreaterThan(70)); // JPA Auto Create this Method
+
+////	Update Query
+//		repo.save(s2);
+
+////	Delete
+		repo.delete(s3);
+
 	}
 
 }
