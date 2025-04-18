@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,18 +18,18 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService service;
+    ProductService productService;
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts()
     {
-       return new ResponseEntity<>( service.getProducts(), HttpStatus.OK);
+       return new ResponseEntity<>( productService.getProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable int id)
     {
-        Product product = service.getProduct(id);
+        Product product = productService.getProduct(id);
         if(product != null)
         {
             return new ResponseEntity<>(product,HttpStatus.OK);
@@ -35,6 +37,28 @@ public class ProductController {
         else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/product/{productId}/image")
+    public ResponseEntity<byte[]> getImage(@PathVariable int productId)
+    {
+        Product product = productService.getProduct(productId);
+        return new ResponseEntity<>(product.getImageData(),HttpStatus.OK);
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile image) {
+
+        Product savedProduct = null;
+        try {
+            savedProduct = productService.addProduct(product, image);
+            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+        }
+
+        catch (IOException e) {
+            return new ResponseEntity<>(e.getCause(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }
