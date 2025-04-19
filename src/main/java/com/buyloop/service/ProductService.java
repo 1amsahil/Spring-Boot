@@ -32,4 +32,18 @@ public class ProductService {
 
         return productRepo.save(product);
     }
+
+    public Product updateProduct(Product product, MultipartFile image) throws IOException {
+        product.setImageName(image.getOriginalFilename());
+        product.setImageData(image.getBytes());
+        product.setImageType(image.getContentType());
+        
+        productRepo.save(product);
+        
+        return product;
+    }
+
+    public void deleteProduct(int productId) {
+        productRepo.deleteById(productId);
+    }
 }
